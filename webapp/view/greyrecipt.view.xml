@@ -1,0 +1,361 @@
+<mvc:View controllerName="zgreyreceipt.controller.greyrecipt"
+	xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:Table="sap.ui.table"
+	xmlns:core="sap.ui.core"
+	xmlns:smartTable="sap.ui.comp.smarttable">
+	<Page id="page" title="{i18n>title}" backgroundDesign="Standard">
+		<content>
+			<f:SimpleForm id="fSimpleForm1" layout="ResponsiveGridLayout" columnsL="3" columnsXL="3" columnsM="2" editable="true">
+				<f:content>
+					<core:Title id="title" />
+					<!-- <Label id="a12" text="Receipt Type" design="Bold" />
+					<Input editable="true" placeholder="Please Enter Receipt Type" id="idreceipttype" /> -->
+					<Label id="a13" text="Doc Date" design="Bold" />
+					<DatePicker editable="true" width="150px" id="docdate" value="{oPayloadData>/PostingDate}" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" placeholder="Please Select Document Date" />
+					<core:Title id="title2" />
+					<Label id="PoDt" required="true" design="Bold" text="Posting Date" />
+					<DatePicker editable="true" width="150px" id="PostingDate" value="{oPayloadData1>/PostingDate1}" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" placeholder="Please Select Posting Date" />
+					<!-- <Label id="a10" text="Material Doc." design="Bold" />
+					<Input editable="true" placeholder="Please Enter Material Doc." id="idmatdoc" /> -->
+					<core:Title id="title3" />
+					<Label id="a101" required="true" text="Party Challan No." design="Bold" />
+					<Input editable="true" width="150px" placeholder="Please Enter Party Challan No." id="idchallan" />
+
+                    <!-- <Label id="label" required="true" text="Delivery Note" design="Bold" />
+					<Input editable="true" width="150px" placeholder="Please Enter Delivery Note" id="delivery" />
+ -->
+
+					<Label design="Bold" id="tc1" text="Party"   required="true" />
+                    <ComboBox items="{path : '/Supplier',length : '100000',templateShareable:false}" width="150px"  showSecondaryValues="true" id="supplier" >
+                       <items>
+                             <core:ListItem id="tc2" text="{Supplier}" key="{Supplier}" additionalText="{SupplierName}"/>
+                        </items>
+                    </ComboBox>
+
+				</f:content>
+			</f:SimpleForm>
+			<Table:Table class="CssForTable" selectionBehavior="RowSelector" rowHeight="10rem" id="table1" rows="{oTableDataModel>/aTableData}">
+				<Table:extension>
+					<OverflowToolbar id="greyreceiptscreen" style="Clear">
+						<Button id="Fd" text="Delete" icon="sap-icon://delete" tooltip="Delete Table records" press="DeletaTableData"/>
+					</OverflowToolbar>
+				</Table:extension>
+				<Table:columns>
+					<Table:Column id="a18" width="4rem">
+						<Label id="Lab11" design="Bold" text="S.No."></Label>
+						<Table:template>
+							<Input id="a19" value="{oTableDataModel>sno}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a24" width="6rem">
+						<Label id="Lab29" design="Bold" text="Beam Number"></Label>
+						<Table:template>
+							<Input id="a25" maxLength="10" value="{oTableDataModel>setnumber}" submit="onRead" />
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a20" width="8rem">
+						<Label id="Lab10" design="Bold" text="Item Code"></Label>
+						<Table:template>
+							<Input id="a21" value="{oTableDataModel>itemcode}" editable="false" />
+
+							<!-- editable="{oCommonModel>/hide}" -->
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a201" width="8rem">
+						<Label id="Lab101" design="Bold" text="Beam Length"></Label>
+						<Table:template>
+							<Input id="a211" value="{oTableDataModel>beamlength}" editable="false" />
+
+							<!-- editable="{oCommonModel>/hide}" -->
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a22" width="11rem">
+						<Label id="Lab12" design="Bold" text="Description"></Label>
+						<Table:template>
+							<Input id="a23" value="{oTableDataModel>descrption}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+
+					<Table:Column id="a26" width="6rem">
+						<Label id="Lab15" design="Bold" text="Mov. Type"></Label>
+						<Table:template>
+							<Input id="a27" value="{oTableDataModel>movtype}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a30" width="8rem">
+						<Label id="Lab13" design="Bold" text="PO"></Label>
+						<Table:template>
+							<Input id="a31" value="{oTableDataModel>po}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a32" width="6rem">
+						<Label id="Lab30" design="Bold" text="Po Item"></Label>
+						<Table:template>
+							<Input id="a33" value="{oTableDataModel>poitem}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a34" width="7rem">
+						<Label id="Lab37" design="Bold" text="Supplier"></Label>
+						<Table:template>
+							<Input id="a35" value="{oTableDataModel>supplier}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a341" width="9rem">
+						<Label id="Lab371" design="Bold" text="Suppliername"></Label>
+						<Table:template>
+							<Input id="a351" value="{oTableDataModel>suppliername}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a481" width="6rem">
+						<Label id="Lab1511" design="Bold" text="Party Beam"></Label>
+						<Table:template>
+							<Input id="a491"  value="{oTableDataModel>partybeam}" editable="{otable>/hide}"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a36" width="7rem">
+						<Label id="Lab21" design="Bold" text="PC Number"></Label>
+						<Table:template>
+							<Input id="a37" maxLength="10" value="{oTableDataModel>piecenumber}" submit="onpcnocheck" editable="true"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a48" width="6rem">
+						<Label id="Lab151" design="Bold" text="Loom "></Label>
+						<Table:template>
+							<Input id="a49" maxLength="4" value="{oTableDataModel>Loom}" editable="{otable>/hide}"/>
+						</Table:template>
+					</Table:Column>
+					
+					<Table:Column id="a139" width="9rem">
+						<Label id="Lab122" design="Bold" text="PC Length"></Label>
+						<Table:template>
+							<Input value="{oTableDataModel>Length}" submit="CallSecondTableData" id="a140" editable="true"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a39" width="9rem">
+						<Label id="Lab22" design="Bold" text="Order Quantity"></Label>
+						<Table:template>
+							<Input value="{oTableDataModel>orderqty}" id="a40" editable="false"/>
+						</Table:template>
+					</Table:Column>
+
+					<Table:Column id="a391" width="4rem">
+						<Label id="Lab221" design="Bold" text="UOM"></Label>
+						<Table:template>
+							<Input value="{oTableDataModel>UOM}" id="a401" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a44" width="5rem">
+						<Label id="Lab23" design="Bold" text="Pick"></Label>
+						<Table:template>
+							<Input id="a45" maxLength="3" type="Number" value="{oTableDataModel>Pick}" editable="{otable>/hide}"/>
+
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a46" width="6rem">
+						<Label id="Lab111" design="Bold" text="Party Challan"></Label>
+						<Table:template>
+							<Input id="a47" value="{oTableDataModel>partychlaan}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					
+					<!-- <Table:Column id="a50" width="6rem">
+						<Label id="Lab141" design="Bold" text="Gross Weight"></Label>
+						<Table:template>
+							<Input id="a51" value="{oTableDataModel>grossweight}" editable="{otable>/hide}"/>
+						</Table:template>
+					</Table:Column> -->
+					
+					<Table:Column id="a1501" width="6rem">
+						<Label id="Lab14211" design="Bold" text="Internal Batch"></Label>
+						<Table:template>
+							<Input id="a5211" value="{oTableDataModel>finishroll}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<!-- <Table:Column id="a77" width="6rem">
+						<Label id="Lab147" design="Bold" text="Tare Weight"></Label>
+						<Table:template>
+							<Input id="a771" value="{oTableDataModel>tareweight}" editable="{otable>/hide}"/>
+						</Table:template>
+					</Table:Column> -->
+					<Table:Column id="a78" width="6rem">
+						<Label id="Lab149" design="Bold" text="Net Weight"></Label>
+						<Table:template>
+							<Input id="a781" value="{oTableDataModel>netwt}" submit="getAvgWt" editable="{otable>/hide}"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a52" width="10rem">
+						<Label id="Lab121" design="Bold" text="Per Mtr Avg Weight"></Label>
+						<Table:template>
+							<Input id="a53" value="{oTableDataModel>per_avg_mtr}" editable="{otable>/hide}"/>
+						</Table:template>
+					</Table:Column>
+					<!-- <Table:Column id="a1521" width="10rem">
+						<Label id="Lab1221" design="Bold" text="Per Mtr PO Rate"></Label>
+						<Table:template>
+							<Input id="a523" value="{oTableDataModel>permtrporate}" editable="{otable>/hide}"/>
+						</Table:template>
+					</Table:Column> -->
+					<Table:Column id="a501" width="8rem">
+						<Label id="Lab1411" design="Bold" text="Sales Order"></Label>
+						<Table:template>
+							<Input id="a511" value="{oTableDataModel>salesorder}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a521" width="10rem">
+						<Label id="Lab1211" design="Bold" text="SO Line Item"></Label>
+						<Table:template>
+							<Input id="a531" value="{oTableDataModel>solineitem}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+
+					<Table:Column id="a522" width="10rem">
+						<Label id="Lab1212" design="Bold" text="Grey Receipt"></Label>
+						<Table:template>
+							<Input id="a5312" value="{oTableDataModel>grey_recpit}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+				</Table:columns>
+			</Table:Table>
+
+
+			<Table:Table class="CssForTable" selectionBehavior="RowSelector" id="table2" rows="{oTableDataModel1>/aTableData1}">
+				<Table:columns>
+					<Table:Column id="a154" width="4rem">
+						<Label id="Lab14" design="Bold" text="S.No."></Label>
+						<Table:template>
+							<Input id="a551" value="{oTableDataModel1>SNO}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a54" width="8rem">
+						<Label id="Lab4" design="Bold" text="Item Code"></Label>
+						<Table:template>
+							<Input id="a55" value="{oTableDataModel1>itemcode}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a56" width="6rem">
+						<Label id="Lab9" design="Bold" text="Description"></Label>
+						<Table:template>
+							<Input id="a58" value="{oTableDataModel1>descrption}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a57" width="7rem">
+						<Label id="Lab5" design="Bold" text="Qty"></Label>
+						<Table:template>
+							<Input id="a59" value="{oTableDataModel1>qtytlength}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a60" width="9rem">
+						<Label id="Lab6" design="Bold" text="Remaining Qty"></Label>
+						<Table:template>
+							<Input id="a61" value="{oTableDataModel1>remainingqty}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a6011" width="7rem">
+						<Label id="a601111" design="Bold" text="Target Consumption"></Label>
+						<Table:template>
+							<Input id="a60111" value="{oTableDataModel1>targetqty}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a6" width="7rem">
+						<Label id="Lab60" design="Bold" text="Actual Consumption"></Label>
+						<Table:template>
+							<Input id="a601" value="{oTableDataModel1>reqqty}" editable="true"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a62" width="8rem">
+						<Label id="Lab7" design="Bold" text="Set Number"></Label>
+						<Table:template>
+							<!-- <Input id="a63" value="{oTableDataModel1>setnumber}" showValueHelp="true" valueHelpRequest="f4setnumber" editable="true"/> -->
+							<Input id="a63" value="{oTableDataModel1>setnumber}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpRequest">
+								<customData>
+									<core:CustomData key="VC" />
+								</customData>
+							</Input>
+							<!-- <ComboBox items="{modelname1>/odataelementlist1}" id="a63" value="{oTableDataModel1>setnumber}" showSecondaryValues="true">
+							<items>
+								<core:ListItem id="a450" text="{modelname1>Batch}" key="{modelname1>Batch}" additionalText="{modelname1>Material}" />
+							</items>
+						</ComboBox> -->
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a64" width="7rem">
+						<Label id="Lab8" design="Bold" text="Mov Type"></Label>
+						<Table:template>
+							<Input id="a65" value="{oTableDataModel1>movtype}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a90" width="7rem">
+						<Label id="ansh" design="Bold" text="Supplier"></Label>
+						<Table:template>
+							<Input id="klpo" value="{oTableDataModel1>supplier}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a67" width="6rem">
+						<Label id="Lab19" design="Bold" text="PO"></Label>
+						<Table:template>
+							<Input id="a68" value="{oTableDataModel1>po}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a72" width="6rem">
+						<Label id="Lab191" design="Bold" text="Po Item"></Label>
+						<Table:template>
+							<Input id="a70" value="{oTableDataModel1>poitem}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a73" width="6rem">
+						<Label id="Lab193" design="Bold" text="Sales Order"></Label>
+						<Table:template>
+							<Input id="a74" value="{oTableDataModel1>salesoder}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a75" width="8rem">
+						<Label id="Lab194" design="Bold" text="SO Line Item"></Label>
+						<Table:template>
+							<Input id="a76" value="{oTableDataModel1>Solineitem}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a175" width="8rem">
+						<Label id="Lab4194" design="Bold" text="Batch"></Label>
+						<Table:template>
+							<Input id="a176" value="{oTableDataModel1>batch}" editable="false"/>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a79" width="8rem">
+						<Label id="Lab80" design="Bold" text="Edit"></Label>
+						<Table:template>
+							<Button id="opkl" icon="sap-icon://edit" text="edit" tooltip="Edit table Qty Filed" press="setRowEditable" />
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="a81" visible="{oCommonModel>/hide}" width="10rem">
+						<Label id="Lab82" visible="{oCommonModel>/hide}" design="Bold" text="Remark"></Label>
+						<Table:template >
+							<Input id="Remark" value="{oTableDataModel1>Remark}" visible="{oCommonModel>/hide}"></Input>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="q81"  width="10rem">
+						<Label id="w82"  design="Bold" text="itemcode First"></Label>
+						<Table:template >
+							<Input id="sq" value="{oTableDataModel1>itemcodefirst}" ></Input>
+						</Table:template>
+					</Table:Column>
+					<Table:Column id="Length81"  width="10rem">
+						<Label id="Length82"  design="Bold" text="Length First"></Label>
+						<Table:template >
+							<Input id="sLength" value="{oTableDataModel1>LengthFirst}" ></Input>
+						</Table:template>
+					</Table:Column>
+				</Table:columns>
+			</Table:Table>
+
+		</content>
+		<footer>
+			<Bar id="bar">
+				<contentRight>
+					<Button id="bt3" icon="sap-icon://save" text="Save" type="Emphasized" press="savedata" visible="{}"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>
